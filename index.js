@@ -41,10 +41,43 @@ class Airplane {
 */
 
 class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+  }
 
+  eat(someFood) {
+    this.stomach.push(someFood);
+
+    if (this.stomach.length > 10) {
+      this.stomach.pop();
+    }
+    return this.stomach;
+  }
+
+  poop() {
+    for (let i = 0; i < 10; i++) {
+      this.stomach.shift();
+    }
+    return console.log(this.stomach.length);
+  }
+
+  toString() {
+    return `${this.name}, ${this.age}`;
+  }
 }
 
+const Nick = new Person("Nick", 41);
+console.log(Nick);
+
+Nick.eat("hotdog");
+Nick.eat("hamburger");
+Nick.eat("corn");
+Nick.poop();
+Nick.toString();
 /*
+
   TASK 2
     - Write a Car class whose constructor initializes `model` and `milesPerGallon` from arguments.
     - All instances built with Car:
@@ -59,8 +92,51 @@ class Person {
 */
 
 class Car {
+  constructor(model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+    this.gasoline = [0];
+    this.trip = [];
+  }
 
+  fill(fuel) {
+    for (let i = 0; i < fuel; i++) {
+      this.gasoline.push(1);
+    }
+    const fillTank = this.gasoline.reduce((total, item) => {
+      return total + item;
+    }, 0);
+    return (this.tank = 0 + fillTank);
+  }
+
+  drive(miles) {
+    for (let i = 0; i < miles; i++) {
+      this.trip.push(1);
+    }
+    if (this.trip.length >= this.fill() * this.milesPerGallon) {
+      return [
+        (this.odometer = this.fill() * this.milesPerGallon),
+        (this.tank = 0),
+        `I ran out of fuel at ${this.odometer} miles!`,
+      ];
+    } else {
+      console.log(this.trip.length);
+      return console.log(
+        (this.odometer = 0 + this.trip.length),
+        (this.tank = this.fill() - miles / this.milesPerGallon)
+      );
+    }
+  }
 }
+const comaro = new Car("Comaro", 20);
+console.log(comaro);
+
+comaro.fill(10);
+comaro.drive(201);
+
+console.log(comaro);
 
 /*
   TASK 3
@@ -75,7 +151,15 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
+  constructor(attr) {
+    this.name = attr.name;
+    this.age = attr.age;
+    this.location = attr.location;
+  }
 
+  speak() {
+    return `Hello my name is ${this.name}, I am from ${this.location}.`;
+  }
 }
 
 /*
@@ -92,9 +176,7 @@ class Lambdasian {
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
-
-}
+class Instructor {}
 
 /*
   TASK 5
@@ -111,9 +193,7 @@ class Instructor {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
-
-}
+class Student {}
 
 /*
   TASK 6
@@ -128,9 +208,7 @@ class Student {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
-
-}
+class ProjectManager {}
 
 /*
   STRETCH PROBLEM (no tests!)
@@ -144,13 +222,27 @@ class ProjectManager {
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
-if (typeof exports !== 'undefined') {
-  module.exports = module.exports || {}
-  if (Airplane) { module.exports.Airplane = Airplane }
-  if (Person) { module.exports.Person = Person }
-  if (Car) { module.exports.Car = Car }
-  if (Lambdasian) { module.exports.Lambdasian = Lambdasian }
-  if (Instructor) { module.exports.Instructor = Instructor }
-  if (Student) { module.exports.Student = Student }
-  if (ProjectManager) { module.exports.ProjectManager = ProjectManager }
+if (typeof exports !== "undefined") {
+  module.exports = module.exports || {};
+  if (Airplane) {
+    module.exports.Airplane = Airplane;
+  }
+  if (Person) {
+    module.exports.Person = Person;
+  }
+  if (Car) {
+    module.exports.Car = Car;
+  }
+  if (Lambdasian) {
+    module.exports.Lambdasian = Lambdasian;
+  }
+  if (Instructor) {
+    module.exports.Instructor = Instructor;
+  }
+  if (Student) {
+    module.exports.Student = Student;
+  }
+  if (ProjectManager) {
+    module.exports.ProjectManager = ProjectManager;
+  }
 }
