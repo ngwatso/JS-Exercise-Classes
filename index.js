@@ -191,6 +191,10 @@ class Instructor extends Lambdasian {
   grade(student, subject) {
     return `${student.name} receives a perfect score on ${subject}`;
   }
+
+  gradeStudent() {
+    return Math.floor(Math.random() * 201) - 100;
+  }
 }
 
 /*
@@ -214,7 +218,7 @@ class Student extends Lambdasian {
     this.previousBackground = attr3.previousBackground;
     this.className = attr3.className;
     this.favSubjects = attr3.favSubjects;
-    this.grade = Math.floor(Math.random() * 100) + 1;
+    this.grade = 75;
   }
 
   listSubjects() {
@@ -227,6 +231,24 @@ class Student extends Lambdasian {
 
   sprintChallenge(subject) {
     return `${this.name} has begun sprint challenge on ${subject}`;
+  }
+
+  graduate() {
+    if (this.grade >= 95) {
+      return `Congratulations!  You've graduated with an A (${this.grade}%)!`;
+    } else if (this.grade >= 90) {
+      return `Congratulations!  You've graduated with an A- (${this.grade}%)!`;
+    } else if (this.grade >= 85) {
+      return `Congratulations!  You've graduated with a B (${this.grade}%)!`;
+    } else if (this.grade >= 80) {
+      return `Congratulations!  You've graduated with a B- (${this.grade}%)!`;
+    } else if (this.grade >= 75) {
+      return `Congratulations!  You've graduated with a C (${this.grade}%)!`;
+    } else if (this.grade >= 70) {
+      return `Congratulations!  You've graduated with a C- (${this.grade}%)!`;
+    } else {
+      return `Well, you tried!  Get to flippin' them burgers (${this.grade}%)!`;
+    }
   }
 }
 
@@ -269,7 +291,7 @@ class ProjectManager extends Instructor {
 */
 
 const nick = new Student({
-  name: Nick,
+  name: "Nick",
   age: 35,
   location: "Michigan",
   previousBackground: "Operations Manager",
@@ -277,7 +299,24 @@ const nick = new Student({
   favSubjects: "Math",
 });
 
+const pace = new Instructor({
+  name: "Pace",
+  age: 33,
+  location: "Somewhere",
+  specialty: "JavaScript",
+});
+
+const teagan = new ProjectManager({
+  name: "Teagan",
+  age: 30,
+  location: "Somewhere else",
+  specialty: "Stand ups",
+});
+
+console.log((nick.grade = nick.grade + pace.gradeStudent()));
+console.log((nick.grade = nick.grade + teagan.gradeStudent()));
 console.log(nick.grade);
+console.log(nick.graduate());
 
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
